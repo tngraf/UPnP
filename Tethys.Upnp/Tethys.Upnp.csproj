@@ -71,4 +71,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>nuget restore "$(ProjectDir)packages.config" -PackagesDirectory "$(SolutionDir)packages"</PreBuildEvent>
+  </PropertyGroup>
 </Project>
