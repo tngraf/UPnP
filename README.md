@@ -10,6 +10,9 @@ shows the supported services and lets you execute the actions that are provided.
 Your can browse through the files of your media libraries and download them on
 your PC.
 
+## Project Status ##
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
 ## Solution Overview ##
 
 * **Tethys.Upnp** - basic UPnP support, device discovery via SSPD, service detection,
