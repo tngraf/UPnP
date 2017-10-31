@@ -12,6 +12,7 @@ your PC.
 
 ## Project Status ##
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Build status](https://ci.appveyor.com/api/projects/status/81p6l5dujp6l8s4l?svg=true)](https://ci.appveyor.com/project/tngraf/upnp)
 
 ## Solution Overview ##
 
