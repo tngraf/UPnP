@@ -10,11 +10,12 @@
 // either express or implied. 
 // ---------------------------------------------------------------------------
 
-//#define SHOW_SEARCH_RESULTS
+////#define SHOW_SEARCH_RESULTS
 
 namespace UpnpAnalyzer.UI
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Threading;
@@ -573,7 +574,10 @@ namespace UpnpAnalyzer.UI
 #endif
             this.rtfLogView.ShowDebugEvents = true;
 
-            LogManager.Adapter = new LogViewFactoryAdapter(this.rtfLogView);
+            var settings = new Dictionary<string, string>();
+            ////settings.Add("AddTime", "false");
+            settings.Add("AddLevel", "false");
+            LogManager.Adapter = new LogViewFactoryAdapter(this.rtfLogView, settings);
             log = LogManager.GetLogger(typeof(MainForm));
         } // ConfigureLogging()
         #endregion // PRIVATE METHODS
