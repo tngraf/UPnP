@@ -331,6 +331,45 @@ namespace Tethys.Upnp.Services.ContentDirectory
             metadata.TotalMatches = int.Parse((string)result.Output[2]);
             metadata.UpdateId = int.Parse((string)result.Output[3]);
 
+            var total = metadata.TotalMatches;
+            var count = metadata.NumberReturned;
+            while (count < total)
+            {
+                var input2 = new List<object>();
+                input2.Add(objectId);
+                input2.Add("BrowseDirectChildren");
+                input2.Add(filter); // Filter "" or "*"
+                input2.Add(count);
+                input2.Add(requestCount);
+                input2.Add(sortCriteria);
+
+                result = await InvokeAction(action, input2);
+                if (!result.Success)
+                {
+                    Log.Error("Error invoking action!");
+                    this.DisplayStatusText($"Error executing action: {result.ErrorMessage} (code {result.ErrorCode})",
+                        Color.Red);
+                    return metadata;
+                }  // if
+
+                if ((result.Output == null) || (result.Output.Length < 4))
+                {
+                    this.DisplayStatusText("Invalid number of return arguments!", Color.Red);
+                    Log.Error("Invalid number of return arguments!");
+                    return metadata;
+                } // if
+
+                var metadata2 = ParseDidlChildData((string)result.Output[0]);
+                metadata2.NumberReturned = int.Parse((string)result.Output[1]);
+
+                foreach (var child in metadata2.Children)
+                {
+                    metadata.AddChildItem(child);
+                } // foreach
+
+                count += metadata2.NumberReturned;
+            } // while
+
             this.DisplayStatusText("Action successfully executed.", Color.Black);
             return metadata;
         } // BrowseDirectChildren()
